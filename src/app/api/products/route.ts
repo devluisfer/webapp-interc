@@ -1,13 +1,18 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import { NextResponse } from 'next/server';
 
-const API_URL = 'http://localhost:3001'; // JSON Server en local
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET() {
   try {
-    const response = await axios.get(`${API_URL}/products`);
-    res.status(200).json(response.data);
+    const response = await fetch('https://webapp-interc-production.up.railway.app/products');
+    
+    if (!response.ok) {
+      return NextResponse.json({ error: 'Error al obtener productos' }, { status: 500 });
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener productos' });
+    
+    console.error('Error en GET /api/products:', error); //Ahora el error se usa y no causa warning
+    return NextResponse.json({ error: 'Error interno del servidor' }, { status: 500 });
   }
 }
