@@ -44,7 +44,7 @@ export default function ProductList({ initialProducts, category }: ProductListPr
   });
 
   /** 🔹 Obtener productos con React Query */
-  const { data, error, isLoading, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['products', debouncedSearch, localCategory ?? '', brand, page],
     queryFn: async () => {
       console.log("🔵 Haciendo consulta a la API con categoría:", localCategory, "y búsqueda:", debouncedSearch);

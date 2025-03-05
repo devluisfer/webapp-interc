@@ -11,12 +11,13 @@ interface ProductProps {
     image: string;
 }
 
-export default function ProductCard({ id, sku, name, brand, category, price, image }: ProductProps) {
+export default function ProductCard({ sku, name, brand, category, price, image }: ProductProps) {
     const imageUrl = image.startsWith('/') ? image : `/${image}`;
     return (
         <div className="border rounded-lg p-4 shadow-md">
 
             <Image
+                
                 src={imageUrl}
                 alt={name}
                 width={200}
