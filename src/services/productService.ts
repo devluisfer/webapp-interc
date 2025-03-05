@@ -16,7 +16,7 @@ export interface ProductsResponse {
 }
 
 // 🔥 Aseguramos que la URL siempre tenga un dominio válido
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:3001/api/products';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://db-zzme.onrender.com/products';
 
 
 export const getProducts = async ({

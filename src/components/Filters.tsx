@@ -23,7 +23,7 @@ export default function Filters({ onCategoryChange, onBrandChange }: FiltersProp
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const res = await fetch('http://localhost:3001/products');
+        const res = await fetch('https://db-zzme.onrender.com/products');
         if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
         
         const products: Product[] = await res.json();
