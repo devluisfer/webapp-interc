@@ -16,7 +16,7 @@ export interface ProductsResponse {
 }
 
 // 🔥 Aseguramos que la URL siempre tenga un dominio válido
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://webapp-interc.onrender.com/products';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:3001/api/products';
 
 
 export const getProducts = async ({
@@ -35,6 +35,10 @@ export const getProducts = async ({
     params.append('_limit', limit.toString());
 
     const url = `${API_URL}?${params.toString()}`;
+
+
+    // const url = params.toString() ? `${API_URL}?${params.toString()}` : API_URL;
+
     console.log('📡 Fetching products from:', url);
 
     const response = await axios.get(url);
