@@ -1,28 +1,27 @@
 import axios from 'axios';
 
-
-// Definir la estructura de un producto
 export interface Product {
-    id: number;
-    sku: string;
-    name: string;
-    brand: string;
-    category: string;
-    price: number;
-    image: string;
-  }
-  
-  // Definir la estructura de la respuesta esperada
-  export interface ProductsResponse {
-    products: Product[];
-    total: number;
-  }
+  id: number;
+  sku: string;
+  name: string;
+  brand: string;
+  category: string;
+  price: number;
+  image: string;
+}
 
-const API_URL = 'http://localhost:3001/products';
+export interface ProductsResponse {
+  products: Product[];
+  total: number;
+}
 
-/**
- * Obtiene la lista de productos desde la API.
- */export const getProducts = async ({
+// 🔥 Aseguramos que la URL siempre tenga un dominio válido
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')
+    ? process.env.NEXT_PUBLIC_API_URL
+    : 'http://localhost:3001/products';
+
+export const getProducts = async ({
   search = '',
   category = '',
   brand = '',
@@ -32,34 +31,35 @@ const API_URL = 'http://localhost:3001/products';
   try {
     const params = new URLSearchParams();
     if (search) params.append('q', search);
-    // if (category) params.append('category', category);
     if (category) params.append('category_like', category.charAt(0).toUpperCase() + category.slice(1));
     if (brand) params.append('brand', brand);
-    params.append('_page', page.toString()); // Paginación
-    params.append('_limit', limit.toString()); // Límite de productos por página
+    params.append('_page', page.toString());
+    params.append('_limit', limit.toString());
 
-    const response = await axios.get(`${API_URL}?${params.toString()}`);
+    const url = `${API_URL}?${params.toString()}`;
+    console.log('📡 Fetching products from:', url);
 
-    console.log("🟢 Respuesta de la API en getProducts():", response.data);
+    const response = await axios.get(url);
+
     return {
       products: response.data,
-      total: Number(response.headers['x-total-count']) || 0, // Total de productos
+      total: Number(response.headers['x-total-count']) || 0,
     };
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('❌ Error en getProducts:', error);
     throw error;
   }
 };
 
-/**
- * Obtiene los detalles de un producto por SKU.
- */
 export const getProductBySku = async (sku: string) => {
   try {
-    const response = await axios.get(`${API_URL}?sku=${sku}`);
+    const url = `${API_URL}?sku=${sku}`;
+    console.log('📡 Fetching product by SKU from:', url);
+
+    const response = await axios.get(url);
     return response.data.length > 0 ? response.data[0] : null;
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error('❌ Error en getProductBySku:', error);
     return null;
   }
 };
