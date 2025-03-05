@@ -1,5 +1,6 @@
 'use client';
 
+import { FilterProvider } from '@/context/FilterContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -9,7 +10,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+          <FilterProvider>
+            {children}
+          </FilterProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
