@@ -16,10 +16,8 @@ export interface ProductsResponse {
 }
 
 // 🔥 Aseguramos que la URL siempre tenga un dominio válido
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL && process.env.NEXT_PUBLIC_API_URL.startsWith('http')
-    ? process.env.NEXT_PUBLIC_API_URL
-    : 'http://localhost:3001/products';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://webapp-interc.onrender.com/products';
+
 
 export const getProducts = async ({
   search = '',
