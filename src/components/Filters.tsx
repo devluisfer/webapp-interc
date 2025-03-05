@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useFilter } from '@/context/FilterContext';
-import '@/styles/globals.css';
 
 interface Product {
   category: string;
@@ -18,23 +17,41 @@ export default function Filters({ onCategoryChange, onBrandChange }: FiltersProp
   const { category, setCategory, brand, setBrand } = useFilter();
   const [categories, setCategories] = useState<string[]>([]);
   const [brands, setBrands] = useState<string[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   /** 🔹 Obtener categorías y marcas dinámicamente desde la API */
   useEffect(() => {
-    fetch('http://localhost:3001/products')
-      .then((res) => res.json())
-      .then((products: Product[]) => { // ✅ 🔥 Especificamos que `products` es un array de `Product`
+    const fetchFilters = async () => {
+      try {
+        const res = await fetch('http://localhost:3001/products');
+        if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
+        
+        const products: Product[] = await res.json();
+
+        if (!products || products.length === 0) {
+          throw new Error("La API devolvió una respuesta vacía.");
+        }
+
         const uniqueCategories: string[] = [...new Set(products.map((p) => p.category))];
         const uniqueBrands: string[] = [...new Set(products.map((p) => p.brand))];
 
         setCategories(uniqueCategories);
         setBrands(uniqueBrands);
-      })
-      .catch((error) => console.error("Error obteniendo filtros:", error));
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error("Error obteniendo filtros:", error.message);
+          setErrorMessage(error.message);
+        }
+      }
+    };
+
+    fetchFilters();
   }, []);
 
   return (
     <div className="flex flex-col md:flex-row gap-4 mb-6">
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
       <select
         className="border p-2 w-full md:w-1/4"
         value={category || ''}
