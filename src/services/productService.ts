@@ -39,6 +39,15 @@ export const getProducts = async ({
 
     const response = await axios.get(url);
 
+    if (!Array.isArray(response.data)) {
+      console.warn("⚠️ La API no devolvió un array. Intentando sin paginación...");
+      const fallbackResponse = await axios.get(API_URL);
+      return {
+        products: fallbackResponse.data,
+        total: fallbackResponse.data.length,
+      };
+    }
+
     return {
       products: response.data,
       total: Number(response.headers['x-total-count']) || 0,

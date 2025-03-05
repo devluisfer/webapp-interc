@@ -24,6 +24,12 @@ export const useTotalProducts = ({ search = '', category = '', brand = '' }: Tot
 
         const response = await axios.get(API_URL, { params });
 
+        if (!Array.isArray(response.data)) {
+          console.warn("⚠️ La API no devolvió un array. Intentando sin paginación...");
+          const fallbackResponse = await axios.get(API_URL);
+          return fallbackResponse.data.length;
+        }
+
         if (!response.data || !Array.isArray(response.data)) {
           console.warn('⚠️ Advertencia en useTotalProducts: Respuesta vacía o inesperada.');
           return 0; // Evita errores en pruebas
