@@ -1,6 +1,11 @@
-const jsonServer = require('json-server');
-const cors = require('cors');
-const path = require('path');
+// const jsonServer = require('json-server');
+import jsonServer from 'json-server';
+
+// const cors = require('cors');
+import cors from 'cors';
+
+// const path = require('path');
+import path from 'path';
 
 const server = jsonServer.create();
 const dbPath = path.join(__dirname, 'db.json'); // Ruta absoluta a db.json

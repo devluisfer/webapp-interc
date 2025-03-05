@@ -22,7 +22,7 @@ describe('useTotalProducts Hook', () => {
   test('devuelve el total de productos correctamente', async () => {
     mockedAxios.get.mockResolvedValue({ data: Array(20).fill({}) });
 
-    const { result } = renderHook(function useTestHook() { // ✅ Se le asigna un nombre
+    const { result } = renderHook(function useTotalProductsTestSuccess() { // ✅ Se asigna un nombre explícito
       return useTotalProducts({});
     }, { wrapper: createWrapper() });
 
@@ -35,7 +35,7 @@ describe('useTotalProducts Hook', () => {
   test('maneja errores si la API falla en obtener el total de productos', async () => {
     mockedAxios.get.mockRejectedValue(new Error('Error al obtener productos'));
 
-    const { result } = renderHook(function useTestHook() { // ✅ Se le asigna un nombre
+    const { result } = renderHook(function useTotalProductsTestError() { // ✅ Se asigna un nombre explícito
       return useTotalProducts({});
     }, { wrapper: createWrapper() });
 
