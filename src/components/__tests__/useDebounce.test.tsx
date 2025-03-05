@@ -7,7 +7,7 @@ describe('useDebounce Hook', () => {
   test('devuelve el valor inicial inmediatamente', () => {
     const { result } = renderHook(() => useDebounce('Test', 500));
 
-    expect(result.current).toBe('Test'); // ✅ El valor inicial se mantiene sin cambios
+    expect(result.current).toBe('Test');
   });
 
   test('retrasa la actualización del valor', () => {
@@ -15,19 +15,19 @@ describe('useDebounce Hook', () => {
       initialProps: { value: 'Inicial' },
     });
 
-    expect(result.current).toBe('Inicial'); // ✅ Mantiene el valor inicial
+    expect(result.current).toBe('Inicial');
 
     // 🔄 Se cambia el valor antes de 500ms
     rerender({ value: 'Nuevo valor' });
 
-    expect(result.current).toBe('Inicial'); // ⏳ Aún no se ha actualizado
+    expect(result.current).toBe('Inicial');
 
     // ⏳ Avanzamos el tiempo a 500ms
     act(() => {
       jest.advanceTimersByTime(500);
     });
 
-    expect(result.current).toBe('Nuevo valor'); // ✅ Después del debounce, se actualiza
+    expect(result.current).toBe('Nuevo valor');
   });
 
   test('cancela la actualización si cambia antes de completarse', () => {
@@ -35,20 +35,20 @@ describe('useDebounce Hook', () => {
       initialProps: { value: 'Primero' },
     });
 
-    expect(result.current).toBe('Primero'); // ✅ Valor inicial
+    expect(result.current).toBe('Primero');
 
     rerender({ value: 'Segundo' });
     act(() => {
-      jest.advanceTimersByTime(250); // ⏳ Avanzamos solo 250ms (mitad del debounce)
+      jest.advanceTimersByTime(250);
     });
 
-    rerender({ value: 'Tercero' }); // ⏳ Antes de que termine, cambia el valor
+    rerender({ value: 'Tercero' });
 
     act(() => {
-      jest.advanceTimersByTime(500); // ⏳ Ahora dejamos correr el tiempo
+      jest.advanceTimersByTime(500);
     });
 
-    expect(result.current).toBe('Tercero'); // ✅ Solo el último valor se aplica
+    expect(result.current).toBe('Tercero');
   });
 
   test('se limpia correctamente al desmontarse', () => {
@@ -61,9 +61,9 @@ describe('useDebounce Hook', () => {
     unmount(); // 🔥 Desmontamos el hook
 
     act(() => {
-      jest.advanceTimersByTime(500); // ⏳ Avanzamos el tiempo
+      jest.advanceTimersByTime(500); //Avanzamos el tiempo
     });
 
-    expect(result.current).toBe('Antes'); // ✅ No se actualiza después de desmontar
+    expect(result.current).toBe('Antes'); //No se actualiza después de desmontar
   });
 });

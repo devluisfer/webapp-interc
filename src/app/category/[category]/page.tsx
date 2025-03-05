@@ -1,11 +1,17 @@
 import { getProducts } from '@/services/productService';
 import ProductList from '@/components/ProductList';
 import Breadcrumb from '@/components/Breadcrumb';
+
 import '@/styles/globals.css';
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
+interface CategoryPageProps {
+  params: {
+    category: string;
+  };
+}
+export default async function CategoryPage({ params }: CategoryPageProps) {
   if (!params?.category) {
-    console.error("❌ Error: Categoría no encontrada en los parámetros.");
+    console.error("Error: Categoría no encontrada en los parámetros.");
     return <p className="text-center text-red-600">Categoría no encontrada</p>;
   }
   const decodedCategory = decodeURIComponent(params.category);
