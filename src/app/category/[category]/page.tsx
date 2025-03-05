@@ -4,18 +4,24 @@ import Breadcrumb from '@/components/Breadcrumb';
 
 import '@/styles/globals.css';
 
-interface CategoryPageProps {
-  params: {
-    category: string;
-  };
-}
-export default async function CategoryPage({ params }: CategoryPageProps) {
+// ✅ Cambiar la interfaz de parámetros
+// interface CategoryPageProps {
+//   params: { category: string | string[] }; // 🔥 Manejar arrays también
+// }
+type Params = Promise<{ category: string }>
+
+export default async function CategoryPage(props: { params: Params }) {
+  const params = await props.params;
+  // const category = params.category;
   if (!params?.category) {
-    console.error("Error: Categoría no encontrada en los parámetros.");
+    console.error("❌ Error: Categoría no encontrada en los parámetros.");
     return <p className="text-center text-red-600">Categoría no encontrada</p>;
   }
-  const decodedCategory = decodeURIComponent(params.category);
+
+  // 🔥 Asegurar que `params.category` es siempre un string válido
+  const decodedCategory = decodeURIComponent(Array.isArray(params.category) ? params.category[0] : params.category);
   const formattedCategory = decodedCategory.charAt(0).toUpperCase() + decodedCategory.slice(1);
+
   console.log("🟡 Cargando categoría en page.tsx:", formattedCategory);
 
   const initialData = await getProducts({ category: formattedCategory });

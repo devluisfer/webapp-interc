@@ -4,12 +4,14 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
 import '@/styles/globals.css';
 
-interface ProductPageProps {
-  params?: { sku?: string }; // 🔥 Hacemos `params` opcional para evitar errores de acceso temprano
-}
+// interface ProductPageProps {
+//   params?: { sku?: string }; // 🔥 Hacemos `params` opcional para evitar errores de acceso temprano
+// }
+type Params = Promise<{ sku: string }>
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage(props: { params: Params }) {
 
+  const params = await props.params;
   if (!params?.sku) {
     console.error("❌ Error: SKU no encontrado en los parámetros.");
     return notFound();
