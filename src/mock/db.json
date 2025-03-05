@@ -1,23 +1,184 @@
 {
-    "products": [
-      {
-        "id": 1,
-        "sku": "12345",
-        "name": "Smartphone XYZ",
-        "brand": "TechCorp",
-        "category": "Phones",
-        "price": 499.99,
-        "image": "/images/smartphone.jpg"
-      },
-      {
-        "id": 2,
-        "sku": "67890",
-        "name": "Laptop Ultra",
-        "brand": "TechCorp",
-        "category": "Laptops",
-        "price": 899.99,
-        "image": "/images/laptop.jpg"
-      }
-    ]
-  }
-  
+  "products": [
+    {
+      "id": 1,
+      "sku": "12345",
+      "name": "Smartphone XYZ",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 499.99,
+      "image": "/images/smartphone.jpg"
+    },
+    {
+      "id": 2,
+      "sku": "67890",
+      "name": "Laptop Ultra",
+      "brand": "TechCorp",
+      "category": "Laptops",
+      "price": 899.99,
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": 3,
+      "sku": "11111",
+      "name": "Smartphone Alpha",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 599.99,
+      "image": "/images/smartphone.jpg"
+    },
+    {
+      "id": 4,
+      "sku": "22222",
+      "name": "Laptop Pro",
+      "brand": "TechCorp",
+      "category": "Laptops",
+      "price": 1299.99,
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": 5,
+      "sku": "33333",
+      "name": "Tablet Mini",
+      "brand": "TechCorp",
+      "category": "Tablets",
+      "price": 299.99,
+      "image": "/images/tablet.jpg"
+    },
+    {
+      "id": 6,
+      "sku": "44444",
+      "name": "Smartphone Beta",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 699.99,
+      "image": "/images/smartphone.jpg"
+    },
+    {
+      "id": 7,
+      "sku": "55555",
+      "name": "Gaming Laptop",
+      "brand": "TechCorp",
+      "category": "Laptops",
+      "price": 1599.99,
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": 8,
+      "sku": "66666",
+      "name": "Tablet Pro",
+      "brand": "TechCorp",
+      "category": "Tablets",
+      "price": 499.99,
+      "image": "/images/tablet.jpg"
+    },
+    {
+      "id": 9,
+      "sku": "77777",
+      "name": "Smartwatch Series 5",
+      "brand": "TechCorp",
+      "category": "Wearables",
+      "price": 199.99,
+      "image": "/images/smartwatch.jpg"
+    },
+    {
+      "id": 10,
+      "sku": "88888",
+      "name": "Gaming Mouse",
+      "brand": "TechCorp",
+      "category": "Accessories",
+      "price": 49.99,
+      "image": "/images/mouse.jpg"
+    },
+    {
+      "id": 11,
+      "sku": "99999",
+      "name": "Mechanical Keyboard",
+      "brand": "TechCorp",
+      "category": "Accessories",
+      "price": 129.99,
+      "image": "/images/keyboard.jpg"
+    },
+    {
+      "id": 12,
+      "sku": "10101",
+      "name": "4K Monitor",
+      "brand": "TechCorp",
+      "category": "Monitors",
+      "price": 399.99,
+      "image": "/images/monitor.jpg"
+    },
+    {
+      "id": 13,
+      "sku": "20202",
+      "name": "Wireless Headphones",
+      "brand": "TechCorp",
+      "category": "Audio",
+      "price": 149.99,
+      "image": "/images/headphones.jpg"
+    },
+    {
+      "id": 14,
+      "sku": "30303",
+      "name": "Smart Speaker",
+      "brand": "TechCorp",
+      "category": "Audio",
+      "price": 99.99,
+      "image": "/images/speaker.jpg"
+    },
+    {
+      "id": 15,
+      "sku": "40404",
+      "name": "Smartphone Gamma",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 799.99,
+      "image": "/images/smartphone.jpg"
+    },
+    {
+      "id": 16,
+      "sku": "50505",
+      "name": "Business Laptop",
+      "brand": "TechCorp",
+      "category": "Laptops",
+      "price": 1099.99,
+      "image": "/images/laptop.jpg"
+    },
+    {
+      "id": 17,
+      "sku": "60606",
+      "name": "Smart Phone XX",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 249.99,
+      "image": "/images/smartphone.jpg"
+    },
+    {
+      "id": 18,
+      "sku": "70707",
+      "name": "Portable Charger",
+      "brand": "TechCorp",
+      "category": "Accessories",
+      "price": 29.99,
+      "image": "/images/charger.jpg"
+    },
+    {
+      "id": 19,
+      "sku": "80808",
+      "name": "Wireless Earbuds",
+      "brand": "TechCorp",
+      "category": "Audio",
+      "price": 89.99,
+      "image": "/images/earbuds.jpg"
+    },
+    {
+      "id": 20,
+      "sku": "90909",
+      "name": "Smartphone Delta",
+      "brand": "TechCorp",
+      "category": "Phones",
+      "price": 899.99,
+      "image": "/images/smartphone.jpg"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import '@/styles/globals.css';
 interface ProductProps {
     id: number;
     sku: string;
@@ -14,21 +15,20 @@ export default function ProductCard({ id, sku, name, brand, category, price, ima
     const imageUrl = image.startsWith('/') ? image : `/${image}`;
     return (
         <div className="border rounded-lg p-4 shadow-md">
-            {/* <img src={image} alt={name} className="w-full h-40 object-cover rounded" /> */}
 
             <Image
                 src={imageUrl}
                 alt={name}
                 width={200}
                 height={200}
-                className="w-full h-40 object-cover rounded"
+                className="w-full h-80 object-cover rounded"
                 priority
             />
 
             <h2 className="text-lg font-bold mt-2">{name}</h2>
             <p className="text-gray-600">{brand} - {category}</p>
             <p className="text-green-600 font-semibold">${price.toFixed(2)}</p>
-            <Link href={`/products/${sku}`} className="text-blue-500 mt-2 block">
+            <Link href={`/products/${sku}`} className="text-blue-500 mt-2 block bg-sky-100">
                 Ver detalles
             </Link>
         </div>

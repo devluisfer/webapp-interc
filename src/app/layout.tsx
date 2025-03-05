@@ -1,20 +1,29 @@
-'use client';
+import ClientProviders from '@/components/ClientProviders';
 
-import { FilterProvider } from '@/context/FilterContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useState } from 'react';
+export const metadata = {
+  title: "Catálogo de Productos | Mi E-commerce",
+  description: "Encuentra los mejores productos en nuestro catálogo online.",
+  openGraph: {
+    title: "Catálogo de Productos | Mi E-commerce",
+    description: "Explora nuestra variedad de productos con las mejores ofertas.",
+    type: "website",
+    url: "https://tu-ecommerce.vercel.app",
+    images: [
+      {
+        url: "https://tu-ecommerce.vercel.app/images/banner.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Catálogo de Productos",
+      },
+    ],
+  },
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <html lang="es">
       <body>
-        <QueryClientProvider client={queryClient}>
-          <FilterProvider>
-            {children}
-          </FilterProvider>
-        </QueryClientProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

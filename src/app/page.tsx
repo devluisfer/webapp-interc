@@ -115,6 +115,8 @@
 
 import { getProducts } from '@/services/productService';
 import ProductList from '@/components/ProductList';
+import '@/styles/globals.css';
+import { Suspense } from 'react';
 
 export default async function HomePage() {
   const initialData = await getProducts({ page: 1, limit: 6 });; // Primera carga en SSR
@@ -122,7 +124,10 @@ export default async function HomePage() {
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-6">Catálogo de Productos</h1>
-      <ProductList initialProducts={initialData.products} />
+      <Suspense fallback={<div className="text-center">Cargando productos...</div>}>
+        <ProductList initialProducts={initialData.products} />
+      </Suspense>
+      
     </main>
   );
 }

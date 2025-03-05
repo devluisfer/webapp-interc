@@ -1,3 +1,4 @@
+import '@/styles/globals.css';
 export default function ProductSkeleton() {
     return (
       <div className="border rounded-lg p-4 shadow-md animate-pulse">

@@ -2,8 +2,19 @@ import { notFound } from 'next/navigation';
 import { getProductBySku } from '@/services/productService';
 import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumb';
+import '@/styles/globals.css';
 
-export default async function ProductPage({ params }: { params: { sku: string } }) {
+interface ProductPageProps {
+  params?: { sku?: string }; // 🔥 Hacemos `params` opcional para evitar errores de acceso temprano
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+
+  if (!params?.sku) {
+    console.error("❌ Error: SKU no encontrado en los parámetros.");
+    return notFound();
+  }
+
   try {
     const product = await getProductBySku(params.sku);
 
@@ -13,20 +24,24 @@ export default async function ProductPage({ params }: { params: { sku: string } 
 
     return (
       <div className="container mx-auto p-4">
-        {/* Breadcrumb */}
         <Breadcrumb category={product.category} productName={product.name} />
 
         <h1 className="text-2xl font-bold">{product.name}</h1>
         <p className="text-gray-700">{product.brand}</p>
         <p className="text-xl text-green-600">${product.price}</p>
 
-        <div className="flex justify-center my-4">
-          <Image src={product.image} alt={product.name} width={400} height={400} className="w-1/2 object-cover rounded-lg" priority />
-        </div>
+        <Image
+          src={product.image}
+          alt={product.name}
+          width={400}
+          height={300}
+          className="mx-auto my-4"
+          priority
+        />
       </div>
     );
   } catch (error) {
-    console.error("Error al obtener el producto:", error);
-    throw new Error("Error al cargar el producto");
+    console.error("❌ Error obteniendo el producto:", error);
+    return notFound();
   }
 }
