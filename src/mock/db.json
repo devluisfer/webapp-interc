@@ -1,0 +1,23 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "sku": "12345",
+        "name": "Smartphone XYZ",
+        "brand": "TechCorp",
+        "category": "Phones",
+        "price": 499.99,
+        "image": "/images/smartphone.jpg"
+      },
+      {
+        "id": 2,
+        "sku": "67890",
+        "name": "Laptop Ultra",
+        "brand": "TechCorp",
+        "category": "Laptops",
+        "price": 899.99,
+        "image": "/images/laptop.jpg"
+      }
+    ]
+  }
+  
