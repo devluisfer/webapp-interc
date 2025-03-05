@@ -32,12 +32,15 @@ const API_URL = 'http://localhost:3001/products';
   try {
     const params = new URLSearchParams();
     if (search) params.append('q', search);
-    if (category) params.append('category', category);
+    // if (category) params.append('category', category);
+    if (category) params.append('category_like', category.charAt(0).toUpperCase() + category.slice(1));
     if (brand) params.append('brand', brand);
     params.append('_page', page.toString()); // Paginación
     params.append('_limit', limit.toString()); // Límite de productos por página
 
     const response = await axios.get(`${API_URL}?${params.toString()}`);
+
+    console.log("🟢 Respuesta de la API en getProducts():", response.data);
     return {
       products: response.data,
       total: Number(response.headers['x-total-count']) || 0, // Total de productos

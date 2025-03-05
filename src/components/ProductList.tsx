@@ -1,13 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '@/services/productService';
 import { useDebounce } from '@/hooks/useDebounce';
 import ProductCard from './ProductCard';
 import ProductSkeleton from './ProductSkeleton';
 
-// Definimos la estructura de un producto
 interface Product {
   id: number;
   sku: string;
@@ -18,25 +17,39 @@ interface Product {
   image: string;
 }
 
-// Definimos la estructura de la respuesta de la API
-interface ProductsResponse {
-  products: Product[];
-  total: number;
+interface ProductListProps {
+  initialProducts: Product[];
+  category?: string; // 🔥 Recibe la categoría de `page.tsx`
 }
 
-export default function ProductList() {
+export default function ProductList({ initialProducts, category }: ProductListProps) {
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState(category || ''); // 🔥 Sincroniza el filtro con la URL
   const [brand, setBrand] = useState('');
   const [page, setPage] = useState(1);
-  const limit = 6; // Número de productos por página
+  const limit = 6;
   const debouncedSearch = useDebounce(search, 500);
 
-  const { data, error, isLoading } = useQuery<ProductsResponse>({
-    queryKey: ['products', debouncedSearch, category, brand, page],
-    queryFn: () => getProducts({ search: debouncedSearch, category, brand, page, limit }),
-    placeholderData: (previousData) => previousData, // Mantiene los datos previos mientras carga
+  // 🔹 React Query para obtener productos
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['products', debouncedSearch, selectedCategory, brand, page], // 🔥 Se asegura de actualizar al cambiar `category`
+    queryFn: () => getProducts({ search: debouncedSearch, category: selectedCategory, brand, page, limit }),
+    initialData: { products: initialProducts ?? [], total: initialProducts?.length ?? 0 },
   });
+
+  // 🔹 Actualiza productos cuando `category` cambia desde la URL (breadcrumb)
+  useEffect(() => {
+    if (category && category !== selectedCategory) {
+      console.log("🟢 Cambio de categoría detectado desde URL:", category);
+      setSelectedCategory(category);
+      refetch(); // 🔥 Forzamos una nueva carga
+    }
+  }, [category, refetch]);
+
+  console.log("🔵 Datos obtenidos de la API:", data?.products);
+  console.log("🟢 Categoría actual:", selectedCategory);
+
+  const products = data?.products ?? [];
 
   return (
     <div className="container mx-auto p-4">
@@ -49,11 +62,13 @@ export default function ProductList() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <select className="border p-2 w-full md:w-1/4" value={category} onChange={(e) => setCategory(e.target.value)}>
+
+        <select className="border p-2 w-full md:w-1/4" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value="">Todas las categorías</option>
           <option value="Phones">Teléfonos</option>
           <option value="Laptops">Laptops</option>
         </select>
+
         <select className="border p-2 w-full md:w-1/4" value={brand} onChange={(e) => setBrand(e.target.value)}>
           <option value="">Todas las marcas</option>
           <option value="TechCorp">TechCorp</option>
@@ -62,17 +77,16 @@ export default function ProductList() {
 
       {/* Lista de Productos con Skeleton Loaders */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {isLoading ? (
-          Array.from({ length: limit }).map((_, index) => <ProductSkeleton key={index} />)
-        ) : data?.products && data.products.length > 0 ? (
-          data.products.map((product: Product) => <ProductCard key={product.id} {...product} />)
-        ) : (
-          <p className="text-center col-span-3">No se encontraron productos.</p>
-        )}
+        {isLoading
+          ? Array.from({ length: limit }).map((_, index) => <ProductSkeleton key={index} />)
+          : products.length > 0
+          ? products.map((product) => <ProductCard key={product.id} {...product} />)
+          : <p className="text-center col-span-3">No se encontraron productos en esta categoría.</p>
+        }
       </div>
 
       {/* Controles de paginación */}
-      {data?.products && data.products.length > 0 && (
+      {products.length > 0 && (
         <div className="flex justify-center gap-4 mt-6">
           <button
             className="px-4 py-2 border bg-gray-200"
@@ -84,8 +98,8 @@ export default function ProductList() {
           <span className="text-lg font-semibold">Página {page}</span>
           <button
             className="px-4 py-2 border bg-gray-200"
-            onClick={() => setPage((prev) => (data?.products.length === limit ? prev + 1 : prev))}
-            disabled={data?.products.length !== limit}
+            onClick={() => setPage((prev) => (products.length === limit ? prev + 1 : prev))}
+            disabled={products.length !== limit}
           >
             Siguiente
           </button>
