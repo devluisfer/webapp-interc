@@ -14,7 +14,7 @@ jest.mock('next/navigation', () => ({
   })),
 }));
 
-fetchMock.enableMocks(); // ✅ Habilita `fetchMock` para que Jest reconozca `fetch`
+fetchMock.enableMocks(); //Habilita `fetchMock` para que Jest reconozca `fetch`
 export default {
     setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   };
