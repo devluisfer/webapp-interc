@@ -84,7 +84,7 @@ Bienvenido al repositorio del **Catálogo de Productos**, una aplicación e-comm
 
 - 🌐 **Web en Vercel:** [webapp-interc.vercel.app](https://webapp-interc.vercel.app/)
 - 🔗 **API en Render:** [db-zzme.onrender.com/products](https://db-zzme.onrender.com/products)\
-  📌 *La API en Render se mantiene activa mientras reciba tráfico. Si no se usa durante un tiempo, puede entrar en "modo suspendido" y demorar unos segundos en responder la primera solicitud.*
+  📌 *La API en Render se mantiene activa mientras reciba tráfico. Si no se usa durante un tiempo, puede entrar en "modo suspendido" y demorar unos segundos o minutos en responder la primera solicitud.*
 
 ---
 
@@ -201,7 +201,7 @@ vercel
 2. **Conectar el repo a Render y desplegar**.
 3. La API estará accesible en `https://db-zzme.onrender.com/products`.
 
-📌 **Nota:** Render suspende la API tras cierto tiempo de inactividad. La primera solicitud puede demorar unos segundos.
+📌 **Nota:** Render suspende la API tras cierto tiempo de inactividad. La primera solicitud puede demorar unos segundos o minutos.
 
 ---
 
