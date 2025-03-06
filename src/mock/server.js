@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const server = jsonServer.create();
-const dbPath = join(__dirname, 'db.json'); // ✅ Corrección para obtener la ruta absoluta
+const dbPath = join(__dirname, 'db.json'); //Corrección para obtener la ruta absoluta
 // const dbPath = path.join(process.cwd(), 'db.json');
 const router = jsonServer.router(dbPath);
 const middlewares = jsonServer.defaults();

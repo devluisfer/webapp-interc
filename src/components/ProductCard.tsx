@@ -29,7 +29,7 @@ export default function ProductCard({ sku, name, brand, category, price, image }
             <h2 className="text-lg font-bold mt-2">{name}</h2>
             <p className="text-gray-600">{brand} - {category}</p>
             <p className="text-green-600 font-semibold">${price.toFixed(2)}</p>
-            <Link href={`/products/${sku}`} className="text-blue-500 mt-2 block bg-sky-100">
+            <Link href={`/products/${sku}`} className="text-blue-500 mt-2 block bg-sky-100 p-2">
                 Ver detalles
             </Link>
         </div>

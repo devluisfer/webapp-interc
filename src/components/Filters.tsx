@@ -49,11 +49,11 @@ export default function Filters({ onCategoryChange, onBrandChange }: FiltersProp
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-6">
+    <div className="flex flex-col md:flex-row gap-4 ">
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
       <select
-        className="border p-2 w-full md:w-1/4"
+        className="border p-2 w-full md:w-1/2"
         value={category || ''}
         onChange={(e) => {
           setCategory(e.target.value);
@@ -67,7 +67,7 @@ export default function Filters({ onCategoryChange, onBrandChange }: FiltersProp
       </select>
 
       <select
-        className="border p-2 w-full md:w-1/4"
+        className="border p-2 w-full md:w-1/2"
         value={brand || ''}
         onChange={(e) => {
           setBrand(e.target.value);

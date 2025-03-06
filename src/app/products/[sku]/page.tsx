@@ -5,7 +5,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import '@/styles/globals.css';
 
 // interface ProductPageProps {
-//   params?: { sku?: string }; // 🔥 Hacemos `params` opcional para evitar errores de acceso temprano
+//   params?: { sku?: string }; // Hacemos `params` opcional para evitar errores de acceso temprano
 // }
 type Params = Promise<{ sku: string }>
 
@@ -25,7 +25,7 @@ export default async function ProductPage(props: { params: Params }) {
     }
 
     return (
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 mt-5">
         <Breadcrumb category={product.category} productName={product.name} />
 
         <h1 className="text-2xl font-bold">{product.name}</h1>

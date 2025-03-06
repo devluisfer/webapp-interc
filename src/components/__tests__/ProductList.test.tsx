@@ -32,11 +32,11 @@ describe('ProductList Component', () => {
   it('debe mostrar una lista de productos', async () => {
     renderWithProviders(<ProductList initialProducts={[]} />);
 
-    // 🔹 Esperar hasta que los productos se rendericen
+    // Esperar hasta que los productos se rendericen
     await waitFor(() => expect(screen.getByText('Producto 1')).toBeInTheDocument());
     await waitFor(() => expect(screen.getByText('Producto 2')).toBeInTheDocument());
 
-    // 🔥 Verifica que se renderiza correctamente
+    // Verifica que se renderiza correctamente
     expect(screen.getByText('Producto 1')).toBeInTheDocument();
     expect(screen.getByText('Producto 2')).toBeInTheDocument();
   });

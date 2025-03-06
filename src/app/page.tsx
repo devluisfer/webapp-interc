@@ -122,7 +122,7 @@ export default async function HomePage() {
   const initialData = await getProducts({ page: 1, limit: 6 });; // Primera carga en SSR
 
   return (
-    <main className="container mx-auto p-4">
+    <main className="container mx-auto p-4 mt-5">
       <h1 className="text-3xl font-bold text-center mb-6">Catálogo de Productos</h1>
       <Suspense fallback={<div className="text-center">Cargando productos...</div>}>
         <ProductList initialProducts={initialData.products} />

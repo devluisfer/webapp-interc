@@ -17,12 +17,12 @@ describe('useDebounce Hook', () => {
 
     expect(result.current).toBe('Inicial');
 
-    // 🔄 Se cambia el valor antes de 500ms
+    //  Se cambia el valor antes de 500ms
     rerender({ value: 'Nuevo valor' });
 
     expect(result.current).toBe('Inicial');
 
-    // ⏳ Avanzamos el tiempo a 500ms
+    // Avanzamos el tiempo a 500ms
     act(() => {
       jest.advanceTimersByTime(500);
     });
@@ -58,7 +58,7 @@ describe('useDebounce Hook', () => {
 
     rerender({ value: 'Después' });
 
-    unmount(); // 🔥 Desmontamos el hook
+    unmount(); //  Desmontamos el hook
 
     act(() => {
       jest.advanceTimersByTime(500); //Avanzamos el tiempo

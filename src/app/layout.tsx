@@ -1,10 +1,11 @@
 import ClientProviders from '@/components/ClientProviders';
+import Layout from '@/components/Layout';
 
 export const metadata = {
-  title: "Catálogo de Productos | Mi E-commerce",
+  title: "Catálogo de Productos | Fernando E-commerce",
   description: "Encuentra los mejores productos en nuestro catálogo online.",
   openGraph: {
-    title: "Catálogo de Productos | Mi E-commerce",
+    title: "Catálogo de Productos | Fernando E-commerce",
     description: "Explora nuestra variedad de productos con las mejores ofertas.",
     type: "website",
     url: "https://tu-ecommerce.vercel.app",
@@ -23,7 +24,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body>
-        <ClientProviders>{children}</ClientProviders>
+        <ClientProviders>
+        <Layout>{children}</Layout>
+        </ClientProviders>
       </body>
     </html>
   );

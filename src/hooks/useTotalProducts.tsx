@@ -47,7 +47,7 @@ export const useTotalProducts = ({ search = '', category = '', brand = '' }: Tot
         }
 
         console.log('Error en useTotalProducts:', errorMessage);
-        throw new Error(errorMessage); // 🔥 Se mantiene el throw para que el test de errores pase
+        throw new Error(errorMessage); //  Se mantiene el throw para que el test de errores pase
       }
     },
     staleTime: 1000 * 60 * 5,

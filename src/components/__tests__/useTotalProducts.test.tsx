@@ -3,11 +3,11 @@ import { useTotalProducts } from '@/hooks/useTotalProducts';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import axios from 'axios';
 
-// 🔥 Mockeamos axios para simular la API sin hacer llamadas reales
+// Mockeamos axios para simular la API sin hacer llamadas reales
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-// 📌 Función para envolver el hook en React Query Provider
+// Función para envolver el hook en React Query Provider
 const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } }, // Evita reintentos automáticos en pruebas

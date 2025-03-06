@@ -4,10 +4,6 @@ import Breadcrumb from '@/components/Breadcrumb';
 
 import '@/styles/globals.css';
 
-// ✅ Cambiar la interfaz de parámetros
-// interface CategoryPageProps {
-//   params: { category: string | string[] }; // 🔥 Manejar arrays también
-// }
 type Params = Promise<{ category: string }>
 
 export default async function CategoryPage(props: { params: Params }) {
@@ -18,7 +14,7 @@ export default async function CategoryPage(props: { params: Params }) {
     return <p className="text-center text-red-600">Categoría no encontrada</p>;
   }
 
-  // 🔥 Asegurar que `params.category` es siempre un string válido
+  // Asegurar que `params.category` es siempre un string válido
   const decodedCategory = decodeURIComponent(Array.isArray(params.category) ? params.category[0] : params.category);
   const formattedCategory = decodedCategory.charAt(0).toUpperCase() + decodedCategory.slice(1);
 
@@ -29,7 +25,7 @@ export default async function CategoryPage(props: { params: Params }) {
   console.log("🔵 Datos iniciales en page.tsx:", initialData);
 
   return (
-    <main className="container mx-auto p-4">
+    <main className="container mx-auto p-4 mt-5">
       <Breadcrumb category={decodedCategory} />
       <h1 className="text-2xl font-bold capitalize">{formattedCategory}</h1>
 
