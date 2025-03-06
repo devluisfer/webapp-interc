@@ -203,6 +203,7 @@ vercel
 
 📌 **Nota:** Render suspende la API tras cierto tiempo de inactividad. La primera solicitud puede demorar unos segundos o minutos.
 
+** Se ha implementado un robot usando *uptimerobot* para mitigar esta incidencia debido a la intermitencia cuando el servicio se activa después de haber estado en suspensión.
 ---
 
 ## 📜 **Convenciones de Commits**
