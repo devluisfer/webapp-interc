@@ -9,6 +9,7 @@ interface FilterContextProps {
   setCategory: (value: string) => void;
   brand: string;
   setBrand: (value: string) => void;
+  resetFilters: () => void;
 }
 
 const FilterContext = createContext<FilterContextProps | undefined>(undefined);
@@ -17,9 +18,14 @@ export function FilterProvider({ children }: { children: React.ReactNode }) {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
   const [brand, setBrand] = useState('');
+  const resetFilters = () => {
+    setSearch('');
+    setCategory('');
+    setBrand('');
+  };
 
   return (
-    <FilterContext.Provider value={{ search, setSearch, category, setCategory, brand, setBrand }}>
+    <FilterContext.Provider value={{ search, setSearch, category, setCategory, brand, setBrand, resetFilters }}>
       {children}
     </FilterContext.Provider>
   );
